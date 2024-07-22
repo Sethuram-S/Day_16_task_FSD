@@ -8,32 +8,16 @@ const countdownElement = document.getElementById('countdown');
   // Initial countdown display
   countdownElement.textContent = seconds;
 
-  // Callback hell implementation
-  setTimeout(() => {
-    seconds -= 1;
+  // Recursive countdown
+  const updateCountdown = () => {
     countdownElement.textContent = seconds;
-    setTimeout(() => {
-      seconds -= 1;
-      countdownElement.textContent = seconds;
-      setTimeout(() => {
-        seconds -= 1;
-        countdownElement.textContent = seconds;
-        setTimeout(() => {
-          seconds -= 1;
-          countdownElement.textContent = seconds;
-          setTimeout(() => {
-            seconds -= 1;
-            countdownElement.textContent = seconds;
-            setTimeout(() => {
-              seconds -= 1;
-              countdownElement.textContent = seconds;
-              setTimeout(() => {
-                countdownElement.textContent = 'Happy Independence Day!';
-              }, 1000);
-            }, 1000);
-          }, 1000);
-        }, 1000);
-      }, 1000);
-    }, 1000);
-  }, 1000);
+    seconds -= 1;
+    if (seconds >= 0) {
+      setTimeout(updateCountdown, 1000);
+    } else {
+      countdownElement.textContent = 'Happy Independence Day!';
+    }
+  };
+
+  updateCountdown();
 })();
